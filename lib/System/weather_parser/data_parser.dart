@@ -5,7 +5,7 @@ import 'package:html/dom.dart' as dom;
 
 class WeatherScrapper {
   // Ключ доступа к API
-  final String apiKey;
+  final String _apiKey;
 
   final String units = "metric";
 
@@ -21,15 +21,14 @@ class WeatherScrapper {
   // Дата
   List<dynamic> dateTxt = [];
 
-  List<dynamic> foreasts = [];
-
-  WeatherScrapper({required this.apiKey});
+  WeatherScrapper(this._apiKey);
 
   Future<void> scrapperWeather(latitude, longitude) async {
 
-    // final response = await http.get(Uri.parse('https://api.openweathermap.org/data/2.5/forecast?lat=$longitude&lon=$latitude&appid=$apiKey&units=$units'));
-    // dom.Document html = dom.Document.html(response.body);
-    final response = await http.get(Uri.parse('https://api.openweathermap.org/data/2.5/forecast?lat=37.785834&lon=-122.406417&appid=ff896d19c1dc90c75346c6a5a828aa92&units=metric'));
+    final response = await http.get(
+      Uri.parse('https://api.openweathermap.org/data/2.5/forecast?lat=$longitude&lon=$latitude&appid=$_apiKey&units=metric')
+    );
+
     dom.Document html = dom.Document.html(response.body);
 
     if (response.statusCode == 200) {
@@ -55,12 +54,6 @@ class WeatherScrapper {
         this.mainTemperature.add(mainTemperature);
         this.weather.add(weather);
         this.dateTxt.add(dateTxt);
-
-        foreasts.add({
-          'mainTemperature': mainTemperature,
-          'weather': weather,
-          'dateTxt': dateTxt,
-        });
       }
     }
   }
