@@ -21,7 +21,20 @@ class WeatherScrapper {
   // Дата
   List<dynamic> dateTxt = [];
 
-  WeatherScrapper(this._apiKey);
+  List<dynamic> feelsLike = [];
+
+  List<dynamic> foreasts = [];
+
+  // Приватный статический экземпляр класса WeatherScrapper
+  static WeatherScrapper? _instance;
+
+  WeatherScrapper._(this._apiKey);
+
+  // Публичный статический метод для получения экземпляра класса WeatherScrapper
+  static WeatherScrapper getInstance(String apiKey) {
+    _instance ??= WeatherScrapper._(apiKey);
+    return _instance!;
+  }
 
   Future<void> scrapperWeather(latitude, longitude) async {
 
@@ -50,10 +63,19 @@ class WeatherScrapper {
         final mainTemperature = forecast['main']['temp'];
         final weather = forecast['weather'][0]['main'];
         final dateTxt = forecast['dt_txt'];
+        final feelsLike = forecast['main']['feels_like'];
 
         this.mainTemperature.add(mainTemperature);
         this.weather.add(weather);
         this.dateTxt.add(dateTxt);
+        this.feelsLike.add(feelsLike);
+
+        foreasts.add({
+          'mainTemperature': mainTemperature,
+          'weather': weather,
+          'dateTxt': dateTxt,
+          'feelsLike' : feelsLike
+        });
       }
     }
   }
