@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_ios/MainPage/weather_middle_little_table.dart';
 import 'package:weather_ios/System/screensize.dart';
 
@@ -65,19 +66,21 @@ class _WeatherCenterTableState extends State<WeatherCenterTable> {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: temp != null ? temp.map<Widget>((dynamic widget) {
-          dynamic temp1 = widget[0];
+          dynamic date = DateTime.parse(widget[0].toString());
           dynamic temperature = widget[1];
 
           return Row(
-            children: [WeatherTitle(
+            children: [
+            SizedBox(width: 20,),
+            WeatherTitle(
               tempeture: temperature.ceil(),
-              time: temp1.toString(),
+              time: "${date.hour}:${date.minute}0",
               image: Image.asset(
                 "assets/icons/rainy.png",
-                width: 15,
+                width: 40,
               ),
             ),
-            SizedBox(width: 10,)]
+            ]
           );
         }).toList()
       : [Text("no")]),

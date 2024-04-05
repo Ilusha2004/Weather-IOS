@@ -2,26 +2,26 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 
-class weather_little extends StatefulWidget {
+class WeatherTitle extends StatefulWidget {
   final int? tempeture;
   final String? time;
   final Image image;
 
-  const weather_little({
+  const WeatherTitle({
     super.key, this.tempeture, this.time, required this.image,
   });
 
   @override
-  State<weather_little> createState() => _weather_littleState();
+  State<WeatherTitle> createState() => _WeatherTitleState();
 }
 
-class _weather_littleState extends State<weather_little> {
+class _WeatherTitleState extends State<WeatherTitle> {
 
   int tempeture = 0;
   String time = "Now";
   Image image = Image.asset(
     "assets/images/background/rainy_day.png",
-    height: 5,
+    height: 10,
   );
 
   @override
@@ -36,6 +36,7 @@ class _weather_littleState extends State<weather_little> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Spacer(),
         Text(
           time,
           style: TextStyle(
@@ -45,19 +46,20 @@ class _weather_littleState extends State<weather_little> {
           ),
         ),
 
-        Row(
+        Column(
           children: [
           image,
           Text(
             "$tempeture°",
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 18,
                 fontWeight: FontWeight.normal,
                 color: Color.fromRGBO(255, 255, 255, 0.965)
               ),
             ),
           ],
-        )
+        ),
+        Spacer(),
       ],
     );
   }
