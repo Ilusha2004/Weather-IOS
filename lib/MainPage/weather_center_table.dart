@@ -1,129 +1,86 @@
+import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_ios/MainPage/weather_middle_little_table.dart';
 import 'package:weather_ios/System/screensize.dart';
 
-class WeatherCenterTable extends StatelessWidget {
+class WeatherCenterTable extends StatefulWidget {
+  final dynamic date;
+  final dynamic temperature;
+
   const WeatherCenterTable({
     super.key,
+    required this.date,
+    required this.temperature
   });
 
   @override
+  State<WeatherCenterTable> createState() => _WeatherCenterTableState();
+}
+
+class _WeatherCenterTableState extends State<WeatherCenterTable> {
+  dynamic temp;
+  dynamic dateList;
+  dynamic temperatureList;
+  int counter = 0;
+  bool isLoading = true;
+  late Timer _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer(Duration(seconds: 2), () {
+      if (counter == 2) {
+          _timer.cancel();
+      }
+      counter += 1;
+
+      dateList = widget.date;
+      temperatureList = widget.temperature;
+      temp = dateList.asMap().entries.map((entry) {
+        int index = entry.key;
+        dynamic date = entry.value;
+        dynamic temperature = temperatureList[index];
+        return [date, temperature];
+      });
+
+      isLoading = false;
+      print(temperatureList);
+      print(dateList);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     return Container(
       color: Colors.black26,
       alignment: Alignment.center,
       width: ScreenSize().screenWidth - 70,
       height: (ScreenSize().screenWidth - 70) * 0.536,
-      child: Column(
-        children: [
-          Spacer(),
-          Row(
-            children: [
-              Spacer(),
-              weather_little(
-                tempeture: 10,
-                time: "Now",
-                image: Image.asset(
-                  "assets/icons/rainy.png",
-                  width: 15,
-                ),
-              ),
-              SizedBox(width: 20,),
-              weather_little(
-                tempeture: 10,
-                time: "Now",
-                image: Image.asset(
-                  "assets/icons/rainy.png",
-                  width: 15,
-                ),
-              ),
-              SizedBox(width: 20,),
-              weather_little(
-                tempeture: 10,
-                time: "Now",
-                image: Image.asset(
-                  "assets/icons/rainy.png",
-                  width: 15,
-                ),
-              ),
-              SizedBox(width: 20,),
-              weather_little(
-                tempeture: 10,
-                time: "Now",
-                image: Image.asset(
-                  "assets/icons/rainy.png",
-                  width: 15,
-                ),
-              ),
-              SizedBox(width: 20,),
-              weather_little(
-                tempeture: 10,
-                time: "Now",
-                image: Image.asset(
-                  "assets/icons/rainy.png",
-                  width: 15,
-                ),
-              ),
-              Spacer()
-            ],
-          ),
-          SizedBox(height: 20,),
-          Row(
-            children: [
-              Spacer(),
-              weather_little(
-                tempeture: 10,
-                time: "Now",
-                image: Image.asset(
-                  "assets/icons/rainy.png",
-                  width: 15,
-                ),
-              ),
-              SizedBox(width: 20,),
-              weather_little(
-                tempeture: 10,
-                time: "Now",
-                image: Image.asset(
-                  "assets/icons/rainy.png",
-                  width: 15,
-                ),
-              ),
-              SizedBox(width: 20,),
-              weather_little(
-                tempeture: 10,
-                time: "Now",
-                image: Image.asset(
-                  "assets/icons/rainy.png",
-                  width: 15,
-                ),
-              ),
-              SizedBox(width: 20,),
-              weather_little(
-                tempeture: 10,
-                time: "Now",
-                image: Image.asset(
-                  "assets/icons/rainy.png",
-                  width: 15,
-                ),
-              ),
-              SizedBox(width: 20,),
-              weather_little(
-                tempeture: 10,
-                time: "Now",
-                image: Image.asset(
-                  "assets/icons/rainy.png",
-                  width: 15,
-                ),
-              ),
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: temp != null ? temp.map<Widget>((dynamic widget) {
+          dynamic temp1 = widget[0];
+          dynamic temperature = widget[1];
 
-              Spacer()
-            ],
-          ),
-          Spacer()
-        ],
-      ),
+          return Row(
+            children: [WeatherTitle(
+              tempeture: temperature.ceil(),
+              time: temp1.toString(),
+              image: Image.asset(
+                "assets/icons/rainy.png",
+                width: 15,
+              ),
+            ),
+            SizedBox(width: 10,)]
+          );
+        }).toList()
+      : [Text("no")]),
     );
   }
 }
