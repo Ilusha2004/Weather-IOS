@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_ios/MainPage/weather_bottom_horisontal_plate.dart';
+import 'package:weather_ios/System/geolocation/data_locator.dart';
 import 'package:weather_ios/System/screensize.dart';
+import 'package:weather_ios/System/weather_parser/weather_scrapper_data.dart';
 
 class WeatherBottomTable extends StatelessWidget {
   const WeatherBottomTable({
@@ -22,40 +25,18 @@ class WeatherBottomTable extends StatelessWidget {
                 Row(
                   children:[
                     SizedBox(width: 20,),
-                    Text(
-                      "Random Text",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromRGBO(255, 255, 255, 0.996),
-                      ),
-                    ),
                   ]
                 ),
               ],
             ),
           ),
+
           Container(
             alignment: Alignment.centerLeft,
             width: ScreenSize().screenWidth - 70,
-            height: (ScreenSize().screenWidth - 70) * 0.33,
-            child: Row(
-              children: [
-                SizedBox(width: 20,),
-                Expanded(
-                  child: Text(
-                    "Improve him believe opinion offered met and end cheered forbade. Friendly as stronger speedily by recurred. Son interest wandered sir addition end say. Manners beloved affixed picture men ask.",
-                    softWrap: true,
-                    style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                  ),
-                ),
-              ),
-              SizedBox(width: 30,),
-              ],
+            child:
+              Wrap(
+                children: List.generate(7, (index) => WeatherBottomHorisontalPlate()),
             ),
           ),
         ],
