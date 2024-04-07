@@ -1,11 +1,32 @@
 import 'package:flutter/material.dart';
 
 class WeatherBottomHorisontalPlate extends StatefulWidget {
+  final String date;
+  final int temperature;
+  final int maxTemperature;
+  final int minTemperature;
+  final int humidity;
+
+  const WeatherBottomHorisontalPlate ({
+    super.key,
+    required this.date,
+    required this.temperature,
+    required this.maxTemperature,
+    required this.minTemperature,
+    required this.humidity,
+  });
+
   @override
   State<WeatherBottomHorisontalPlate> createState() => _WeatherBottomHorisontalPlateState();
 }
 
 class _WeatherBottomHorisontalPlateState extends State<WeatherBottomHorisontalPlate> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -13,7 +34,7 @@ class _WeatherBottomHorisontalPlateState extends State<WeatherBottomHorisontalPl
       child: Row(
         children: [
           Text(
-            "Today",
+            widget.date,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -25,9 +46,9 @@ class _WeatherBottomHorisontalPlateState extends State<WeatherBottomHorisontalPl
             "assets/icons/rainy.png",
             height: 20,
           ),
-          Spacer(),
+          // Spacer(),
           Text(
-            "34%",
+            "${widget.humidity}%",
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -45,7 +66,7 @@ class _WeatherBottomHorisontalPlateState extends State<WeatherBottomHorisontalPl
             height: 20
           ),
           SizedBox(width: 20,),
-          Text("14°",
+          Text("${widget.maxTemperature}°",
           style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -54,7 +75,7 @@ class _WeatherBottomHorisontalPlateState extends State<WeatherBottomHorisontalPl
           ),
           SizedBox(width: 20,),
           Text(
-            "12°",
+            "${widget.minTemperature}°",
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
