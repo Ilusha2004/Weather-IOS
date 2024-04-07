@@ -15,5 +15,7 @@ class WeatherScrapperManager {
   static void updateWeatherData(double latitude, double longitude) async {
     // Обновление данных погоды
     await weatherScrapperInstance.scrapperWeather(latitude, longitude);
+    await weatherScrapperInstance.clearData();
+    // TODO: нужно сделать последовательный вызов, а то сидишь, как еблан, и не можешь понять почему не работает
   }
 }
