@@ -4,15 +4,24 @@ A new Flutter project.
 
 ## Getting Started
 
+### Step 1:
+Сделать клон приложения погоды, пользуясь сервисом openweathermap.
+Приложение должно уметь брать ваше текущее местоположение и показать текущую погоду. Так же должна присутствовать иконка текущей погоды
+### Step 2:
+Снизу сделать карусель, такую же как в нативном приложении которое показывает погоду для каждого часа (реализовать для следующих +6 часов), а так же отображать в карусели иконку погоды
+### Step 3:
+Добавить поиск, который при вводе названия города (либо предлагаемый список городов), будет переводить на новый экран и показывать текущую погоду в этом городе (градусы и иконка)
+### Step 4:
+Добавить под горизонтально каруселью которая показывает погоду для каждого часа, вертикальный список с погодой на неделю вперед
+### Step 5:
+Сделать кэширование погоды, если пользователь зашел без интернета
+### Step 6:
+проверять соединение пользователя при запуске, если интернет есть, делать запрос, если нет, то показывать ранее загруженные данные
+### Step 7:
+Если интернета нет, то загружать предыдущую текущую погоду и говорить пользователю насколько это устарелые данные Пример: (10c (10ч назад)) Сделать интервалы: 1min > 59 min 1h > 23h >1d
+### Step 8:
+Сделать 2 локализации этого приложения, если приложения на англ - показывать Фаренгейты, если на русском языке, то Цельсии
+
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# Weather-IOS
 # Weather-IOS
