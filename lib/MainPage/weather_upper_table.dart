@@ -26,47 +26,16 @@ class WeatherUpperTable extends StatefulWidget {
 }
 
 class _WeatherUpperTableState extends State<WeatherUpperTable> {
-  late Timer _timer;
-  dynamic city;
-  dynamic date;
-  dynamic temperature;
-  dynamic weather;
-  dynamic feelsLike;
-  dynamic sunsetDateInHourAndMinute;
   late bool isLoading = true;
-  int counter = 0;
 
   @override
   void initState() {
     super.initState();
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      isLoading = false;
-      city = widget.city;
-      date = widget.date;
-      temperature = widget.temperature;
-      weather = widget.weather;
-      feelsLike = widget.feelsLike;
-      sunsetDateInHourAndMinute = widget.sunsetDateInHourAndMinute;
-      print(counter);
-      counter += 1;
-      if (counter == 2) {
-        _timer.cancel();
-      }
+    Timer(Duration(seconds: 2), () {
+      setState(() {
+        isLoading = false;
+      });
     });
-    // startTimer();
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
-  }
-
-  void startTimer() {
-
-    if(_timer != null && _timer.isActive && counter == 2) {
-      _timer.cancel();
-    }
   }
 
   @override
@@ -77,6 +46,7 @@ class _WeatherUpperTableState extends State<WeatherUpperTable> {
         child: CircularProgressIndicator(),
       );
     }
+
     return Container(
       color: Colors.black38,
       alignment: Alignment.center,
@@ -102,7 +72,7 @@ class _WeatherUpperTableState extends State<WeatherUpperTable> {
               ),
               SizedBox(width: 20,),
               Text(
-                temperature.isNotEmpty ? temperature[0].ceil().toString() : "...",
+                widget.temperature.isNotEmpty ? widget.temperature[0].ceil().toString() : "...",
                 style: TextStyle(
                   fontSize: 85,
                   fontWeight: FontWeight.bold,
@@ -113,7 +83,7 @@ class _WeatherUpperTableState extends State<WeatherUpperTable> {
             ],
           ),
           Text(
-            weather.isNotEmpty ? weather[0].toString() : '...',
+            widget.weather.isNotEmpty ? widget.weather[0].toString() : '...',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -121,7 +91,7 @@ class _WeatherUpperTableState extends State<WeatherUpperTable> {
             ),
           ),
           Text(
-            city.isNotEmpty ? city['name'] : '...',
+            widget.city.isNotEmpty ? widget.city['name'] : '...',
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
@@ -129,7 +99,7 @@ class _WeatherUpperTableState extends State<WeatherUpperTable> {
             ),
           ),
           Text(
-            date.isNotEmpty ? date[0].toString() : '...',
+            widget.date.isNotEmpty ? widget.date[0].toString() : '...',
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
@@ -137,8 +107,8 @@ class _WeatherUpperTableState extends State<WeatherUpperTable> {
             ),
           ),
           Text(
-            feelsLike.isNotEmpty && sunsetDateInHourAndMinute.isNotEmpty ?
-            "Feels like ${feelsLike[0].ceil().toString()} | Sunset $sunsetDateInHourAndMinute" : "Feels like .. | Sunset ..",
+            widget.feelsLike.isNotEmpty && widget.sunsetDateInHourAndMinute.isNotEmpty ?
+            "Feels like ${widget.feelsLike[0].ceil().toString()} | Sunset ${widget.sunsetDateInHourAndMinute}" : "Feels like .. | Sunset ..",
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,

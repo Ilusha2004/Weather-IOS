@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:weather_ios/MainPage/weather_middle_little_table.dart';
 import 'package:weather_ios/System/screensize.dart';
 
@@ -25,16 +24,11 @@ class _WeatherCenterTableState extends State<WeatherCenterTable> {
   dynamic temperatureList;
   int counter = 0;
   bool isLoading = true;
-  late Timer _timer;
 
   @override
   void initState() {
     super.initState();
-    _timer = Timer(Duration(seconds: 2), () {
-      if (counter == 2) {
-          _timer.cancel();
-      }
-      counter += 1;
+    Timer(Duration(seconds: 2), () {
 
       dateList = widget.date;
       temperatureList = widget.temperature;
