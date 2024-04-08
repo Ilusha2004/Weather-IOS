@@ -5,11 +5,12 @@ import 'package:weather_ios/MainPage/weather_bottom_horisontal_plate.dart';
 import 'package:weather_ios/System/screensize.dart';
 
 class WeatherBottomTable extends StatefulWidget {
-  final List<dynamic> date;
-  final List<dynamic> temperature;
-  final List<dynamic> maxTemperature;
-  final List<dynamic> minTemperature;
-  final List<dynamic> humidity;
+  final dynamic date;
+  final dynamic temperature;
+  final dynamic maxTemperature;
+  final dynamic minTemperature;
+  final dynamic humidity;
+  final dynamic id;
 
   const WeatherBottomTable({
     super.key,
@@ -18,6 +19,7 @@ class WeatherBottomTable extends StatefulWidget {
     required this.maxTemperature,
     required this.minTemperature,
     required this.humidity,
+    this.id
   });
 
   @override
@@ -25,12 +27,13 @@ class WeatherBottomTable extends StatefulWidget {
 }
 
 class _WeatherBottomTableState extends State<WeatherBottomTable> {
-  List<String> date = [];
-  List<dynamic> temperature = [];
-  List<dynamic> maxTemperature = [];
-  List<dynamic> minTemperature = [];
-  List<dynamic> humidity = [];
-  List<dynamic> data = [];
+  dynamic date = [];
+  dynamic temperature = [];
+  dynamic maxTemperature = [];
+  dynamic minTemperature = [];
+  dynamic humidity = [];
+  dynamic data = [];
+  dynamic id = [];
   bool isLoading = true;
 
   @override
@@ -46,6 +49,7 @@ class _WeatherBottomTableState extends State<WeatherBottomTable> {
           maxTemperature.add(widget.maxTemperature[i]);
           minTemperature.add(widget.minTemperature[i]);
           humidity.add(widget.humidity[i]);
+          id.add(widget.id[i]);
           print(widget.date[i]);
 
           // TODO: нужно добавить проверку, когда у нас час не совпадает с последним элементом, а то выкинет исключение
@@ -95,6 +99,7 @@ class _WeatherBottomTableState extends State<WeatherBottomTable> {
                   maxTemperature: maxTemperature[index].ceil(),
                   minTemperature: minTemperature[index].ceil(),
                   humidity: humidity[index].ceil(),
+                  id: id[index],
                 )),
             ),
           ),

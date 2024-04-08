@@ -2,16 +2,19 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:weather_ios/MainPage/weather_middle_little_table.dart';
+import 'package:weather_ios/System/icon_changer/icon_changer.dart';
 import 'package:weather_ios/System/screensize.dart';
 
 class WeatherCenterTable extends StatefulWidget {
   final dynamic date;
   final dynamic temperature;
+  final dynamic id;
 
   const WeatherCenterTable({
     super.key,
     required this.date,
-    required this.temperature
+    required this.temperature,
+    this.id
   });
 
   @override
@@ -28,7 +31,7 @@ class _WeatherCenterTableState extends State<WeatherCenterTable> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 2), () {
+    Timer(Duration(seconds: 3), () {
 
       dateList = widget.date;
       temperatureList = widget.temperature;
@@ -39,7 +42,10 @@ class _WeatherCenterTableState extends State<WeatherCenterTable> {
         return [date, temperature];
       });
 
-      isLoading = false;
+      setState(() {
+        isLoading = false;
+      });
+
       print(temperatureList);
       print(dateList);
     });
@@ -59,25 +65,41 @@ class _WeatherCenterTableState extends State<WeatherCenterTable> {
       height: (ScreenSize().screenWidth - 70) * 0.536,
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children: temp != null ? temp.map<Widget>((dynamic widget) {
-          dynamic date = DateTime.parse(widget[0].toString());
-          dynamic temperature = widget[1];
+        // children: temp != null ? temp.map<Widget>((dynamic widget) {
+        //   dynamic date = DateTime.parse(widget[0].toString());
+        //   dynamic temperature = widget[1];
 
-          return Row(
-            children: [
-            SizedBox(width: 20,),
-            WeatherTitle(
-              tempeture: temperature.ceil(),
-              time: "${date.hour}:${date.minute}0",
-              image: Image.asset(
-                "assets/icons/rainy.png",
-                width: 40,
+        //   return Row(
+        //     children: [
+        //     SizedBox(width: 20,),
+        //     WeatherTitle(
+        //       tempeture: temperature.ceil(),
+        //       time: "${date.hour}:${date.minute}0",
+        //       image: Image.asset(
+        //         IconChanger.chooseIcon(230),
+        //         width: 40,
+        //       ),
+        //     ),
+        //     ]
+        //   );
+        // }).toList()
+        children: List.generate(14, (index) =>
+          Row(
+              children: [
+              SizedBox(width: 20,),
+              WeatherTitle(
+                tempeture: widget.temperature[index].ceil(),
+                time: "${DateTime.parse(widget.date[index]).hour}:00",
+                image: Image.asset(
+                  IconChanger.chooseIcon(widget.id[index]),
+                  width: 40,
+                ),
               ),
-            ),
             ]
-          );
-        }).toList()
-      : [Text("no")]),
+          )
+        ),
+      ),
+      // : [Text("no")]),
     );
   }
 }

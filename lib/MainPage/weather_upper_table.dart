@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:weather_ios/System/icon_changer/icon_changer.dart';
 import 'package:weather_ios/System/screensize.dart';
 
 class WeatherUpperTable extends StatefulWidget {
@@ -10,6 +11,7 @@ class WeatherUpperTable extends StatefulWidget {
   final dynamic weather;
   final dynamic feelsLike;
   final dynamic sunsetDateInHourAndMinute;
+  final dynamic id;
 
   const WeatherUpperTable({
     super.key,
@@ -19,6 +21,7 @@ class WeatherUpperTable extends StatefulWidget {
     required this.weather,
     required this.feelsLike,
     required this.sunsetDateInHourAndMinute,
+    this.id
   });
 
   @override
@@ -41,7 +44,6 @@ class _WeatherUpperTableState extends State<WeatherUpperTable> {
   @override
   Widget build(BuildContext context) {
     if(isLoading) {
-      // dispose();
       return Center(
         child: CircularProgressIndicator(),
       );
@@ -67,7 +69,7 @@ class _WeatherUpperTableState extends State<WeatherUpperTable> {
             children: [
               Spacer(),
               Image.asset(
-                "assets/icons/rainy.png",
+                IconChanger.chooseIcon(widget.id.isNotEmpty ? widget.id[0] : 0),
                 height: 85,
               ),
               SizedBox(width: 20,),

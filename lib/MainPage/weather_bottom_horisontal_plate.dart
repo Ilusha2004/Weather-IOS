@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_ios/System/icon_changer/icon_changer.dart';
 
 class WeatherBottomHorisontalPlate extends StatefulWidget {
   final String date;
@@ -6,6 +7,7 @@ class WeatherBottomHorisontalPlate extends StatefulWidget {
   final int maxTemperature;
   final int minTemperature;
   final int humidity;
+  final dynamic id;
 
   const WeatherBottomHorisontalPlate ({
     super.key,
@@ -14,6 +16,7 @@ class WeatherBottomHorisontalPlate extends StatefulWidget {
     required this.maxTemperature,
     required this.minTemperature,
     required this.humidity,
+    this.id,
   });
 
   @override
@@ -57,12 +60,12 @@ class _WeatherBottomHorisontalPlateState extends State<WeatherBottomHorisontalPl
           ),
           SizedBox(width: 20,),
           Image.asset(
-            "assets/icons/rainy.png",
+            IconChanger.chooseIcon(widget.id),
             height: 20,
           ),
           SizedBox(width: 20,),
           Image.asset(
-            "assets/icons/rainy.png",
+            IconChanger.chooseIcon(widget.id),
             height: 20
           ),
           SizedBox(width: 20,),
