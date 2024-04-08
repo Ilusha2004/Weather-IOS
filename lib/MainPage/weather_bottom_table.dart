@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:weather_ios/MainPage/weather_bottom_horisontal_plate.dart';
 import 'package:weather_ios/System/screensize.dart';
 
@@ -94,7 +96,7 @@ class _WeatherBottomTableState extends State<WeatherBottomTable> {
             child:
               Wrap(
                 children: List.generate(date.length, (index) => WeatherBottomHorisontalPlate(
-                  date: DateTime.parse(date[index]).weekday.toString(),
+                  date: DateTime.parse(date[index]).toString(),
                   temperature: temperature[index].ceil(),
                   maxTemperature: maxTemperature[index].ceil(),
                   minTemperature: minTemperature[index].ceil(),
