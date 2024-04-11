@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:weather_ios/MainPage/weather_middle_little_table.dart';
 import 'package:weather_ios/System/icon_changer/icon_changer.dart';
@@ -31,23 +29,17 @@ class _WeatherCenterTableState extends State<WeatherCenterTable> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () {
+    dateList = widget.date;
+    temperatureList = widget.temperature;
+    temp = dateList.asMap().entries.map((entry) {
+      int index = entry.key;
+      dynamic date = entry.value;
+      dynamic temperature = temperatureList[index];
+      return [date, temperature];
+    });
 
-      dateList = widget.date;
-      temperatureList = widget.temperature;
-      temp = dateList.asMap().entries.map((entry) {
-        int index = entry.key;
-        dynamic date = entry.value;
-        dynamic temperature = temperatureList[index];
-        return [date, temperature];
-      });
-
-      setState(() {
-        isLoading = false;
-      });
-
-      print(temperatureList);
-      print(dateList);
+    setState(() {
+      isLoading = false;
     });
   }
 
@@ -65,27 +57,9 @@ class _WeatherCenterTableState extends State<WeatherCenterTable> {
       height: (ScreenSize().screenWidth - 70) * 0.536,
       child: ListView(
         scrollDirection: Axis.horizontal,
-        // children: temp != null ? temp.map<Widget>((dynamic widget) {
-        //   dynamic date = DateTime.parse(widget[0].toString());
-        //   dynamic temperature = widget[1];
-
-        //   return Row(
-        //     children: [
-        //     SizedBox(width: 20,),
-        //     WeatherTitle(
-        //       tempeture: temperature.ceil(),
-        //       time: "${date.hour}:${date.minute}0",
-        //       image: Image.asset(
-        //         IconChanger.chooseIcon(230),
-        //         width: 40,
-        //       ),
-        //     ),
-        //     ]
-        //   );
-        // }).toList()
         children: List.generate(14, (index) =>
           Row(
-              children: [
+            children: [
               SizedBox(width: 20,),
               WeatherTitle(
                 tempeture: widget.temperature[index].ceil(),
@@ -99,7 +73,6 @@ class _WeatherCenterTableState extends State<WeatherCenterTable> {
           )
         ),
       ),
-      // : [Text("no")]),
     );
   }
 }

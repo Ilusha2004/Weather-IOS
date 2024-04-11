@@ -1,8 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:jiffy/jiffy.dart';
 import 'package:weather_ios/MainPage/weather_bottom_horisontal_plate.dart';
 import 'package:weather_ios/System/screensize.dart';
 
@@ -41,26 +37,23 @@ class _WeatherBottomTableState extends State<WeatherBottomTable> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 4), () {
-      var now = DateTime.parse(widget.date[0]).hour;
-      print(widget.temperature.length);
-      for (int i = 0; i < widget.temperature.length; i++) {
-        if (now == DateTime.parse(widget.date[i]).hour) {
-          date.add(widget.date[i].toString());
-          temperature.add(widget.temperature[i]);
-          maxTemperature.add(widget.maxTemperature[i]);
-          minTemperature.add(widget.minTemperature[i]);
-          humidity.add(widget.humidity[i]);
-          id.add(widget.id[i]);
-          print(widget.date[i]);
+    var now = DateTime.parse(widget.date[0]).hour;
+    print(widget.temperature.length);
+    for (int i = 0; i < widget.temperature.length; i++) {
+      if (now == DateTime.parse(widget.date[i]).hour) {
+        date.add(widget.date[i].toString());
+        temperature.add(widget.temperature[i]);
+        maxTemperature.add(widget.maxTemperature[i]);
+        minTemperature.add(widget.minTemperature[i]);
+        humidity.add(widget.humidity[i]);
+        id.add(widget.id[i]);
 
-          // TODO: нужно добавить проверку, когда у нас час не совпадает с последним элементом, а то выкинет исключение
-          // TODO: добавить мин и макс температуру за день
-        }
+        // TODO: нужно добавить проверку, когда у нас час не совпадает с последним элементом, а то выкинет исключение
+        // TODO: добавить мин и макс температуру за день
       }
-      setState(() {
-        isLoading = false;
-      });
+    }
+    setState(() {
+      isLoading = false;
     });
   }
 

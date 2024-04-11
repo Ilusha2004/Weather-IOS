@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:weather_ios/System/icon_changer/icon_changer.dart';
 import 'package:weather_ios/System/screensize.dart';
@@ -34,10 +32,9 @@ class _WeatherUpperTableState extends State<WeatherUpperTable> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 2), () {
-      setState(() {
-        isLoading = false;
-      });
+    print(widget.temperature.runtimeType);
+    setState(() {
+      isLoading = false;
     });
   }
 
@@ -93,7 +90,7 @@ class _WeatherUpperTableState extends State<WeatherUpperTable> {
             ),
           ),
           Text(
-            widget.city.isNotEmpty ? widget.city['name'] : '...',
+            widget.city.isNotEmpty ? widget.city : '...',
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
@@ -109,8 +106,9 @@ class _WeatherUpperTableState extends State<WeatherUpperTable> {
             ),
           ),
           Text(
-            widget.feelsLike.isNotEmpty && widget.sunsetDateInHourAndMinute.isNotEmpty ?
-            "Feels like ${widget.feelsLike[0].ceil().toString()} | Sunset ${widget.sunsetDateInHourAndMinute}" : "Feels like .. | Sunset ..",
+            widget.feelsLike.isNotEmpty && widget.sunsetDateInHourAndMinute != null ?
+            "Feels like ${widget.feelsLike[0].ceil().toString()} | "
+            "Sunset ${widget.sunsetDateInHourAndMinute}" : "Feels like .. | Sunset ..",
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
