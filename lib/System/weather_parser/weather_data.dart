@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 class WeatherData {
-  // final dynamic city;
   final dynamic mainTemperature;
   final dynamic weather;
   final dynamic dateTxt;
@@ -12,7 +11,6 @@ class WeatherData {
   final dynamic id;
 
   const WeatherData({
-    // required this.city,
     required this.mainTemperature,
     required this.weather,
     required this.dateTxt,
@@ -28,7 +26,6 @@ class WeatherData {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic> {
-      // 'city' : id,
       'mainTemperature' : mainTemperature,
       'weather' : weather,
       'dateTxt' : dateTxt,
@@ -42,7 +39,6 @@ class WeatherData {
 
   factory WeatherData.fromMap(Map<String, dynamic> list) {
     return WeatherData(
-      // city:               list['city'] as dynamic,
       mainTemperature:    list['main']['temp'] as dynamic,
       weather:            list['weather'][0]['main'] as dynamic ,
       dateTxt:            list['dt_txt'] as dynamic ,
@@ -55,8 +51,6 @@ class WeatherData {
   }
 
   String toJson() => json.encode(toMap());
-
-  // factory WeatherData.fromJson(String source) => WeatherData.fromMap(json.decode(source)[0]['list'] as Map<String, dynamic>);
 
   factory WeatherData.fromJson(String source) {
     final decoded = json.decode(source) as Map<String, dynamic>;

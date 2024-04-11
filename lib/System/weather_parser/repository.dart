@@ -16,18 +16,21 @@ class WeatherRepositoryForPrefWay {
   Future<List<WeatherData>> getData() async {
     try {
       final String? jsonData = await mySharedPreferences.getDataIfNotExpired();
-      print(jsonDecode(jsonData!)['list']);
-      if (jsonData != null) {
-        final List<dynamic> jsonList = jsonDecode(jsonData)['list'] as List<dynamic>;
-        return jsonList
-            .map((data) => WeatherData.fromMap(data))
-            .toList();
-      } else {
-        await remoteSource.fetchData();
-        return getData();
-      }
-    } catch (error) {
+      final List<dynamic> jsonList = jsonDecode(jsonData!)['list'] as List<dynamic>;
+      return jsonList
+          .map((data) => WeatherData.fromMap(data))
+          .toList();
+        } catch (error) {
         throw Exception(error);
+    }
+  }
+
+  Future<dynamic> getCity() async {
+    try {
+      final String? jsonData = await mySharedPreferences.getDataIfNotExpired();
+      return jsonDecode(jsonData!)['city'] as dynamic;
+    } catch (error) {
+      throw Exception(error);
     }
   }
 
