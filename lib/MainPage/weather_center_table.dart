@@ -7,12 +7,14 @@ class WeatherCenterTable extends StatefulWidget {
   final dynamic date;
   final dynamic temperature;
   final dynamic id;
+  final dynamic humidity;
 
   const WeatherCenterTable({
     super.key,
     required this.date,
     required this.temperature,
-    this.id
+    required this.humidity,
+    required this.id,
   });
 
   @override
@@ -23,6 +25,7 @@ class _WeatherCenterTableState extends State<WeatherCenterTable> {
   dynamic temp;
   dynamic dateList;
   dynamic temperatureList;
+  dynamic humidity;
   int counter = 0;
   bool isLoading = true;
 
@@ -63,12 +66,15 @@ class _WeatherCenterTableState extends State<WeatherCenterTable> {
               SizedBox(width: 20,),
               WeatherTitle(
                 tempeture: widget.temperature[index].ceil(),
+                humidity: widget.humidity[index],
                 time: "${DateTime.parse(widget.date[index]).hour}:00",
                 image: Image.asset(
                   IconChanger.chooseIcon(widget.id[index]),
                   width: 40,
                 ),
               ),
+              SizedBox(width: (index % 13) == 0 && index > 0 ? 20 : 0,)
+              // TODO: убрать этот конченный костыль (аж плакать хочеться)
             ]
           )
         ),
