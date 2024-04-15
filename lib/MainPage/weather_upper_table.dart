@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_ios/System/icon_changer/icon_changer.dart';
 import 'package:weather_ios/System/screensize.dart';
 
@@ -71,7 +72,7 @@ class _WeatherUpperTableState extends State<WeatherUpperTable> {
               ),
               SizedBox(width: 20,),
               Text(
-                widget.temperature.isNotEmpty ? widget.temperature[0].ceil().toString() : "...",
+                widget.temperature.isNotEmpty ? "${widget.temperature[0].ceil()}°" : "...",
                 style: TextStyle(
                   fontSize: 85,
                   fontWeight: FontWeight.bold,
@@ -98,17 +99,17 @@ class _WeatherUpperTableState extends State<WeatherUpperTable> {
             ),
           ),
           Text(
-            widget.date.isNotEmpty ? widget.date[0].toString() : '...',
+            widget.date.isNotEmpty ? "${DateTime.parse(widget.date[0]).day} ${DateFormat.MMMM().format(DateTime.parse(widget.date[0]))}" : '...',
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Color.fromRGBO(207, 231, 224, 2),
             ),
           ),
           Text(
             widget.feelsLike.isNotEmpty && widget.sunsetDateInHourAndMinute != null ?
-            "Feels like ${widget.feelsLike[0].ceil().toString()} | "
-            "Sunset ${widget.sunsetDateInHourAndMinute}" : "Feels like .. | Sunset ..",
+            "Feels like ${widget.feelsLike[0].ceil()}° | "
+            "Sunset ${DateFormat("HH:mm").format(DateTime.fromMillisecondsSinceEpoch(widget.sunsetDateInHourAndMinute * (1000)))}" : "Feels like .. | Sunset ..",
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
