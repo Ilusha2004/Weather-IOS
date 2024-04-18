@@ -1,9 +1,10 @@
 # Weather-IOS
 
+https://github.com/Ilusha2004/Weather-IOS/assets/102541387/8151682f-c9b0-4f06-bf5b-35efd0cb414a
 
 ## Development tools
 
-### Apllication suppport following
+### Apllication suppports following
 
 - Single Page Pattern
 
