@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 7, 93, 87)),
         useMaterial3: true,
       ),
       home: const MyHomePage(),
@@ -58,8 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
     _repoClass2.refreshData();
     Timer.periodic(Duration(minutes: 10), (timer) {
       initConnectivity();
-      _connectivitySubscription =
-          _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+      _connectivitySubscription = _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
       _repoClass2.refreshData();
     });
   }
@@ -69,8 +68,6 @@ class _MyHomePageState extends State<MyHomePage> {
     _connectivitySubscription.cancel();
     super.dispose();
   }
-
-
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initConnectivity() async {
@@ -82,7 +79,6 @@ class _MyHomePageState extends State<MyHomePage> {
       developer.log('Couldn\'t check connectivity status', error: e);
       return;
     }
-
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
@@ -114,15 +110,18 @@ class _MyHomePageState extends State<MyHomePage> {
           child: FutureBuilder(
             future: posts(),
             builder: (futureContest, snapshot) {
+              if (snapshot.connectionState == ConnectionState.none) {
+                return Text("no data");
+              }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator(),);
+                return Center(child: CircularProgressIndicator());
               }
               // else if (snapshot.hasError) {
               //   return Center(child: Text('Error: ${snapshot.error}'));
               // }
               else {
                 List<dynamic>? data = snapshot.data;
-                if (data == null) {
+                if (data == null || snapshot.connectionState == ConnectionState.none) {
                  Future.delayed(Duration(seconds: 0), () {
                     _repoClass2.refreshData().then((_) {
                       setState(() {}); // Обновить состояние виджета

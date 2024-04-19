@@ -10,7 +10,8 @@ class CurrentWetaherMapperDay {
     "assets/icons/current_weather/day/cloud.sun.rain.fill.png",
     "assets/icons/current_weather/day/cloud.sun.bolt.fill.png",
     "assets/icons/current_weather/day/snowflake.png",
-    "assets/icons/current_weather/day/humidity.fill.png"
+    "assets/icons/current_weather/day/humidity.fill.png",
+    "assets/icons/rainy.png"
   ];
 
   static String getIconPath(CurrentWeather currentWeather) {

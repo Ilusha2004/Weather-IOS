@@ -3,11 +3,11 @@ import 'package:jiffy/jiffy.dart';
 import 'package:weather_ios/System/icon_changer/icon_changer.dart';
 
 class WeatherBottomHorisontalPlate extends StatefulWidget {
-  final String date;
-  final int temperature;
-  final int maxTemperature;
-  final int minTemperature;
-  final int humidity;
+  final String? date;
+  final int? temperature;
+  final int? maxTemperature;
+  final int? minTemperature;
+  final int? humidity;
   final dynamic id;
 
   const WeatherBottomHorisontalPlate ({

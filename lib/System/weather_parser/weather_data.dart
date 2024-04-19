@@ -21,7 +21,6 @@ class WeatherData {
     required this.id
   });
 
-  @override
   List<Object> get props => [mainTemperature, weather, dateTxt, feelsLike, humidity, minTemperature, maxTemperature, id];
 
   Map<String, dynamic> toMap() {

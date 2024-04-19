@@ -15,6 +15,8 @@ class WeatherRepositoryForPrefWay {
 
   Future<List<WeatherData>> getData() async {
     try {
+      final String? temp = await mySharedPreferences.getDataForFinder();
+      print(temp);
       final String? jsonData = await mySharedPreferences.getDataIfNotExpired();
       final List<dynamic> jsonList = jsonDecode(jsonData!)['list'] as List<dynamic>;
       return jsonList

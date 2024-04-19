@@ -1,8 +1,38 @@
+import 'dart:async';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MySharedPreferences {
   static const String _keyData = "cacheData";
   static const String _keyExpiration = "expirationDate";
+  static const String _keyFinderData = "finderData";
+
+  Future<bool> saveDataForFinder(String finderData) async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString(_keyFinderData, finderData);
+      print("data saved");
+      return true;
+    } catch (error) {
+      print("something was wrong in saveDataForFinder: $error");
+      return false;
+    }
+  }
+
+  Future<String?> getDataForFinder() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? history = prefs.getString(_keyFinderData);
+      if (history == null) {
+        print("No data in getDataWhenConnectionLost");
+        return null;
+      }
+      return history;
+    } catch (error) {
+      print("something wrong in getDataWhenConnectionLost: $error");
+      return null;
+    }
+  }
 
   Future<bool> saveDataWithExpiration(String data, Duration expirationDuration) async {
     try {
@@ -14,6 +44,20 @@ class MySharedPreferences {
       return true;
     } catch (e) {
       print('Error saving data to SharedPreferences: $e');
+      return false;
+    }
+  }
+
+  Future<bool> saveDataIfConnectionLost(String data) async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      DateTime expirationTime = DateTime.now().add(Duration(hours: 128));
+      await prefs.setString(_keyData, data);
+      await prefs.setString(_keyExpiration, expirationTime.toIso8601String());
+      print("data saved when connection was lost");
+      return true;
+    } catch (error) {
+      print("something was wrong in saveDataIfConnectionLost: $error");
       return false;
     }
   }

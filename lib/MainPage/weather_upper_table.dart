@@ -58,7 +58,7 @@ class _WeatherUpperTableState extends State<WeatherUpperTable> {
           Text(
             "Today",
             style: TextStyle(
-              fontSize: 25,
+              fontSize: 26,
               fontWeight: FontWeight.bold,
               color: Color.fromRGBO(207, 231, 224, 2),
             ),
@@ -93,7 +93,7 @@ class _WeatherUpperTableState extends State<WeatherUpperTable> {
           Text(
             widget.city.isNotEmpty ? widget.city : '...',
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Color.fromRGBO(207, 231, 224, 2),
             ),
@@ -101,7 +101,7 @@ class _WeatherUpperTableState extends State<WeatherUpperTable> {
           Text(
             widget.date.isNotEmpty ? "${DateTime.parse(widget.date[0]).day} ${DateFormat.MMMM().format(DateTime.parse(widget.date[0]))}" : '...',
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 16,
               fontWeight: FontWeight.bold,
               color: Color.fromRGBO(207, 231, 224, 2),
             ),
@@ -111,7 +111,7 @@ class _WeatherUpperTableState extends State<WeatherUpperTable> {
             "Feels like ${widget.feelsLike[0].ceil()}° | "
             "Sunset ${DateFormat("HH:mm").format(DateTime.fromMillisecondsSinceEpoch(widget.sunsetDateInHourAndMinute * (1000)))}" : "Feels like .. | Sunset ..",
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 16,
               fontWeight: FontWeight.bold,
               color: Color.fromRGBO(207, 231, 224, 2),
             ),

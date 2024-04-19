@@ -38,7 +38,6 @@ class _WeatherBottomTableState extends State<WeatherBottomTable> {
   void initState() {
     super.initState();
     var now = DateTime.parse(widget.date[0]).hour;
-    print(widget.temperature.length);
     for (int i = 0; i < widget.temperature.length; i++) {
       if (now == DateTime.parse(widget.date[i]).hour) {
         date.add(widget.date[i].toString());
